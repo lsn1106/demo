@@ -27,6 +27,11 @@ steps:
     env:
       - KUBECONFIG=/workspace/.kube/config
     args:
+      - kubectl
+      - create
+      - namespace
+      - staging-demo
+      - &&
       - helm
       - upgrade
       - --install
