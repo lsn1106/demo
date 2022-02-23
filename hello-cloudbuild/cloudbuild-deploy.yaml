@@ -26,21 +26,4 @@ steps:
     name: cloudnatived/helm-cloudbuilder
     env:
       - KUBECONFIG=/workspace/.kube/config
-    args:
-      - kubectl
-      - create
-      - namespace
-      - staging-demo
-      - &&
-      - helm
-      - upgrade
-      - --install
-      - ${TAG_NAME}-demo
-      - --namespace=${TAG_NAME}-demo
-      - --values
-      - k8s/demo/${TAG_NAME}-values.yaml
-      - --set
-      - container.image=gcr.io/${PROJECT_ID}/demo
-      - --set
-      - container.tag=${COMMIT_SHA}
-      - ./k8s/demo
+    args: ['kubectl', 'create', 'namespace', 'staging-demo', '&&', 'helm', 'upgrade', '--install', '${TAG_NAME}-demo', '--namespace=${TAG_NAME}-demo', '--values', 'k8s/demo/${TAG_NAME}-values.yaml', '--set', 'container.image=gcr.io/${PROJECT_ID}/demo', '--set', 'container.tag=${COMMIT_SHA}', './k8s/demo']
